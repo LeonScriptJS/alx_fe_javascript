@@ -1,34 +1,39 @@
-// Quotes array
+// quotes array
 const quotes = [
-  { text: "The only way to learn is to build.", category: "learning" },
-  { text: "Code is like humor. When you have to explain it, it’s bad.", category: "programming" },
-  { text: "Small steps every day.", category: "motivation" }
+  { text: "Learning never exhausts the mind.", category: "Education" },
+  { text: "Code is like humor. When you have to explain it, it’s bad.", category: "Programming" },
+  { text: "Success is built on consistency.", category: "Motivation" }
 ];
 
-// DOM elements
-const quoteDisplay = document.getElementById("quoteDisplay");
-const newQuoteButton = document.getElementById("newQuote");
-
-// REQUIRED function
+// function to display random quote
 function displayRandomQuote() {
+  const quoteDisplay = document.getElementById("quoteDisplay");
+
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
 
-  // DOM update WITHOUT innerHTML
-  quoteDisplay.textContent = quote.text + " (" + quote.category + ")";
+  quoteDisplay.textContent = `"${quote.text}" — ${quote.category}`;
 }
 
-// REQUIRED function
+// function to add a quote
 function addQuote() {
-  // Add new quote to array
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
+
+  if (textInput.value === "" || categoryInput.value === "") {
+    return;
+  }
+
   quotes.push({
-    text: "Added quote",
-    category: "added"
+    text: textInput.value,
+    category: categoryInput.value
   });
 
-  // Update DOM
+  textInput.value = "";
+  categoryInput.value = "";
+
   displayRandomQuote();
 }
 
-// REQUIRED event listener
-newQuoteButton.addEventListener("click", displayRandomQuote);
+// event listener for button
+document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
