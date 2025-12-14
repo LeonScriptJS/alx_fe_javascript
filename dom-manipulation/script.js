@@ -132,6 +132,59 @@ function filterQuote() {
   filterQuotes();
                       }
 
+// simulate server URL
+var SERVER_URL = "https://jsonplaceholder.typicode.com/posts";
+
+
+
+function fetchQuotesFromServer() {
+  fetch(SERVER_URL)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(serverData) {
+      // simulate server quotes format
+      var serverQuotes = serverData.slice(0, 5).map(function(item) {
+        return {
+          text: item.title,
+          category: "Server"
+        };
+      });
+
+      resolveConflicts(serverQuotes);
+    });
+    }
+
+
+
+function resolveConflicts(serverQuotes) {
+  // server takes precedence
+  quotes = serverQuotes;
+
+  // update local storage
+  localStorage.setItem("quotes", JSON.stringify(quotes));
+
+  // notify user
+  document.getElementById("syncStatus").innerHTML =
+    "Quotes synced with server. Server data applied.";
+
+  // refresh UI
+  populateCategories();
+  filterQuotes();
+}
+
+
+
+// periodic server sync
+setInterval(function() {
+  fetchQuotesFromServer();
+}, 30000);
+
+
+function manualSync() {
+  fetchQuotesFromServer();
+  alert("Manual sync completed");
+}
 
 
   
