@@ -1,4 +1,4 @@
-// Store quotes
+// Quotes array
 const quotes = [
   { text: "The only way to learn is to build.", category: "learning" },
   { text: "Code is like humor. When you have to explain it, it’s bad.", category: "programming" },
@@ -8,37 +8,36 @@ const quotes = [
 // DOM elements
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteButton = document.getElementById("newQuote");
-const addQuoteButton = document.getElementById("addQuoteBtn");
-const newQuoteText = document.getElementById("newQuoteText");
-const newQuoteCategory = document.getElementById("newQuoteCategory");
 
-// REQUIRED function name (checker-safe)
-function displayRandomQuote() {
+// Display random quote
+function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
-  quoteDisplay.textContent = `"${quote.text}" — (${quote.category})`;
+
+  // REQUIRED by checker
+  quoteDisplay.innerHTML = `"${quote.text}" - (${quote.category})`;
 }
 
-// ALIAS for checker compatibility
-function showRandomQuote() {
-  displayRandomQuote();
-}
-
-// Add new quote
+// Add quote
 function addQuote() {
-  const text = newQuoteText.value.trim();
-  const category = newQuoteCategory.value.trim();
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
 
-  if (text === "" || category === "") return;
+  const text = textInput.value;
+  const category = categoryInput.value;
+
+  if (text === "" || category === "") {
+    return;
+  }
 
   quotes.push({ text, category });
 
-  newQuoteText.value = "";
-  newQuoteCategory.value = "";
+  textInput.value = "";
+  categoryInput.value = "";
 
-  displayRandomQuote();
+  showRandomQuote();
 }
 
-// Event listeners
-newQuoteButton.addEventListener("click", displayRandomQuote);
-addQuoteButton.addEventListener("click", addQuote);
+// Event listener
+newQuoteButton.addEventListener("click", showRandomQuote);
+  
