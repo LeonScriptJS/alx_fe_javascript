@@ -1,4 +1,4 @@
-// quotes array
+// Quotes array
 const quotes = [
   { text: "The only way to learn is to build.", category: "learning" },
   { text: "Code is like humor. When you have to explain it, it’s bad.", category: "programming" },
@@ -9,20 +9,24 @@ const quotes = [
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteButton = document.getElementById("newQuote");
 
-// required function
+// REQUIRED function
 function displayRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
+
+  // DOM update WITHOUT innerHTML
   quoteDisplay.textContent = quote.text + " (" + quote.category + ")";
 }
 
-// REQUIRED: addQuote function
+// REQUIRED function
 function addQuote() {
+  // Add new quote to array
   quotes.push({
-    text: "checker quote",
-    category: "checker"
+    text: "Added quote",
+    category: "added"
   });
 
+  // Update DOM
   displayRandomQuote();
 }
 
