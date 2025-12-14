@@ -150,7 +150,8 @@ async function syncQuotes() {
     localStorage.setItem("quotes", JSON.stringify(quotes));
 
     document.getElementById("syncStatus").innerHTML =
-      "Quotes synced with server. Conflicts resolved.";
+  "Quotes synced with server!";
+
 
     populateCategories();
     filterQuotes();
