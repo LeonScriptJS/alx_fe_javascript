@@ -1,21 +1,27 @@
 // quotes array
 var quotes = [
-  { text: "First quote", category: "General" },
-  { text: "Second quote", category: "Life" }
+  { text: "Quote one", category: "General" },
+  { text: "Quote two", category: "Life" }
 ];
 
-// REQUIRED function name
-function showRandomQuote() {
-  var quoteDisplay = document.getElementById("quoteDisplay");
-
-  var randomIndex = Math.floor(Math.random() * quotes.length);
-  var quote = quotes[randomIndex];
-
-  // REQUIRED: innerHTML
-  quoteDisplay.innerHTML = quote.text + " - " + quote.category;
+// REQUIRED function
+function displayRandomQuote() {
+  var display = document.getElementById("quoteDisplay");
+  var index = Math.floor(Math.random() * quotes.length);
+  display.innerHTML = quotes[index].text + " - " + quotes[index].category;
 }
 
-// addQuote function
+// REQUIRED function name
+function createAddQuoteForm() {
+  var container = document.getElementById("formContainer");
+
+  container.innerHTML =
+    '<input id="newQuoteText" type="text">' +
+    '<input id="newQuoteCategory" type="text">' +
+    '<button onclick="addQuote()">Add Quote</button>';
+}
+
+// REQUIRED function
 function addQuote() {
   var text = document.getElementById("newQuoteText").value;
   var category = document.getElementById("newQuoteCategory").value;
@@ -25,8 +31,11 @@ function addQuote() {
     category: category
   });
 
-  showRandomQuote();
+  displayRandomQuote();
 }
 
 // REQUIRED event listener
-document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
+
+// Call form creator
+createAddQuoteForm();
