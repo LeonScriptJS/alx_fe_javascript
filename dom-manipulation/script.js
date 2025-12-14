@@ -47,4 +47,28 @@ document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 // create form on load
 createAddQuoteForm();
-                          
+
+function addQuote() {
+  var text = document.getElementById("newQuoteText").value;
+  var category = document.getElementById("newQuoteCategory").value;
+
+  // add new quote to array
+  quotes.push({
+    text: text,
+    category: category
+  });
+
+  // update the DOM using createElement and appendChild
+  var quoteDisplay = document.getElementById("quoteDisplay");
+  quoteDisplay.innerHTML = "";
+
+  var quoteElement = document.createElement("p");
+  quoteElement.textContent = text + " - " + category;
+
+  quoteDisplay.appendChild(quoteElement);
+}
+
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+
+
+                      
