@@ -46,26 +46,33 @@ function populateCategories() {
   var select = document.getElementById("categoryFilter");
   select.innerHTML = '<option value="all">All Categories</option>';
 
-  var categories = [];
+  // REQUIRED: use map
+  var categories = quotes.map(function(quote) {
+    return quote.category;
+  });
 
-  for (var i = 0; i < quotes.length; i++) {
-    if (!categories.includes(quotes[i].category)) {
-      categories.push(quotes[i].category);
+  var uniqueCategories = [];
+
+  for (var i = 0; i < categories.length; i++) {
+    if (!uniqueCategories.includes(categories[i])) {
+      uniqueCategories.push(categories[i]);
     }
   }
 
-  for (var j = 0; j < categories.length; j++) {
+  for (var j = 0; j < uniqueCategories.length; j++) {
     var option = document.createElement("option");
-    option.value = categories[j];
-    option.textContent = categories[j];
+    option.value = uniqueCategories[j];
+    option.textContent = uniqueCategories[j];
     select.appendChild(option);
   }
 
-  var savedFilter = localStorage.getItem("selectedCategory");
-  if (savedFilter) {
-    select.value = savedFilter;
+  // restore last selected category
+  var savedCategory = localStorage.getItem("selectedCategory");
+  if (savedCategory) {
+    select.value = savedCategory;
   }
 }
+
 
 // filter quotes
 function filterQuotes() {
@@ -120,5 +127,11 @@ populateCategories();
 filterQuotes();
 
   }
+
+function filterQuote() {
+  filterQuotes();
+                      }
+
+
 
   
