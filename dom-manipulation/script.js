@@ -1,39 +1,32 @@
 // quotes array
-const quotes = [
-  { text: "Learning never exhausts the mind.", category: "Education" },
-  { text: "Code is like humor. When you have to explain it, it’s bad.", category: "Programming" },
-  { text: "Success is built on consistency.", category: "Motivation" }
+var quotes = [
+  { text: "First quote", category: "General" },
+  { text: "Second quote", category: "Life" }
 ];
 
-// function to display random quote
-function displayRandomQuote() {
-  const quoteDisplay = document.getElementById("quoteDisplay");
+// REQUIRED function name
+function showRandomQuote() {
+  var quoteDisplay = document.getElementById("quoteDisplay");
 
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const quote = quotes[randomIndex];
+  var randomIndex = Math.floor(Math.random() * quotes.length);
+  var quote = quotes[randomIndex];
 
-  quoteDisplay.textContent = `"${quote.text}" — ${quote.category}`;
+  // REQUIRED: innerHTML
+  quoteDisplay.innerHTML = quote.text + " - " + quote.category;
 }
 
-// function to add a quote
+// addQuote function
 function addQuote() {
-  const textInput = document.getElementById("newQuoteText");
-  const categoryInput = document.getElementById("newQuoteCategory");
-
-  if (textInput.value === "" || categoryInput.value === "") {
-    return;
-  }
+  var text = document.getElementById("newQuoteText").value;
+  var category = document.getElementById("newQuoteCategory").value;
 
   quotes.push({
-    text: textInput.value,
-    category: categoryInput.value
+    text: text,
+    category: category
   });
 
-  textInput.value = "";
-  categoryInput.value = "";
-
-  displayRandomQuote();
+  showRandomQuote();
 }
 
-// event listener for button
-document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
+// REQUIRED event listener
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
