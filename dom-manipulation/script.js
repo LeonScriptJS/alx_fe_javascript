@@ -91,4 +91,29 @@ document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 // create form on load
 createAddQuoteForm();
+
+function exportToJsonFile() {
+  var data = JSON.stringify(quotes);
+  var blob = new Blob([data], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "quotes.json";
+  a.click();
+}
+
+function importFromJsonFile(event) {
+  var fileReader = new FileReader();
+
+  fileReader.onload = function(event) {
+    var importedQuotes = JSON.parse(event.target.result);
+    quotes.push(...importedQuotes);
+    saveQuotes();
+    alert("Quotes imported successfully!");
+  };
+
+  fileReader.readAsText(event.target.files[0]);
+  }
+
   
