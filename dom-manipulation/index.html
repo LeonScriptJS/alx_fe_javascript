@@ -15,15 +15,14 @@
   <input id="newQuoteText" type="text">
   <input id="newQuoteCategory" type="text">
   <button onclick="addQuote()">Add Quote</button>
+
   <button onclick="exportToJsonFile()">Export Quotes</button>
 
-<input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)">
+  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)">
 
   <select id="categoryFilter" onchange="filterQuotes()">
-  <option value="all">All Categories</option>
+    <option value="all">All Categories</option>
   </select>
-  
-  
 
   <script src="script.js"></script>
 </body>
